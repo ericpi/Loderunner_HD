@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Apple ][ Lode Runner Web Remake</title>
+  <link rel="stylesheet" href="index.css">
+  <!-- Load retro phosphor terminal fonts or similar if needed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <header class="hud">
+      <div class="hud-item">LEVEL <select id="level-select"></select></div>
+      <div class="hud-item">SCORE: <span id="score-val">000000</span></div>
+      <div class="hud-item">LIVES: <span id="lives-val">5</span></div>
+      <button id="sound-btn">SOUND: ON</button>
+      <button id="pause-btn">PAUSE</button>
+      <button id="help-btn">說明</button>
+    </header>
+
+    <div class="game-container">
+      <canvas id="game-canvas"></canvas>
+      
+      <!-- Splash Screen Overlay -->
+      <div id="splash-screen" class="splash-overlay full-splash">
+        <div class="splash-card">
+          <h1 class="splash-title">LODE RUNNER</h1>
+          <p class="splash-subtitle">APPLE ][ RETRO HD</p>
+          <div id="splash-prompt" class="splash-blink">PRESS ANY KEY OR CLICK TO PLAY</div>
+          <div class="splash-actions">
+            <button id="splash-help-btn" class="splash-btn">操作說明 (HELP)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-controls" class="touch-overlay">
+      <div class="dpad">
+        <button id="btn-up" class="ctrl-btn">▲</button>
+        <div class="dpad-middle">
+          <button id="btn-left" class="ctrl-btn">◀</button>
+          <button id="btn-right" class="ctrl-btn">▶</button>
+        </div>
+        <button id="btn-down" class="ctrl-btn">▼</button>
+      </div>
+      <div class="dig-actions">
+        <button id="btn-dig-left" class="ctrl-btn dig-btn">DIG L</button>
+        <button id="btn-dig-right" class="ctrl-btn dig-btn">DIG R</button>
+      </div>
+    </div>
+
+    <!-- Help Modal Overlay -->
+    <div id="help-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">操作說明 (Instructions)</div>
+        <div class="modal-body">
+          <h3>遊戲目標 (Goal)</h3>
+          <p>收集關卡中所有的金幣 ($)，然後爬上畫面最上方出現的逃生梯 (S) 即可過關。</p>
+          
+          <h3>鍵盤控制 (Keyboard)</h3>
+          <ul>
+            <li><strong>移動 (Move)</strong>: 方向鍵 (Arrow Keys) 或 WASD 鍵</li>
+            <li><strong>向左挖地 (Dig Left)</strong>: Z 鍵</li>
+            <li><strong>向右挖地 (Dig Right)</strong>: X 鍵</li>
+          </ul>
+          
+          <h3>行動裝置 (Mobile)</h3>
+          <ul>
+            <li>使用畫面下方的虛擬按鍵 (D-Pad 與 DIG 按鈕) 進行操作。</li>
+          </ul>
+
+          <h3>遊戲規則 (Rules)</h3>
+          <ul>
+            <li>避開紅色的警衛 (0)。若被困在挖開的洞中，警衛會掉落攜帶的金幣。</li>
+            <li>你可以踩在被困住的警衛頭上通過。</li>
+            <li>被挖開的磚塊會在 6 秒後復原，若警衛被埋會被消滅並重新生成。</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button id="help-close-btn">關閉 (CLOSE)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="src/game.js"></script>
+</body>
+</html>
